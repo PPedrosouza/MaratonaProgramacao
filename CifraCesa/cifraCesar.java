@@ -1,4 +1,3 @@
-package cifraDeCesar;
 import java.util.Scanner;
 
 public class CifraDeCesar {
@@ -6,20 +5,31 @@ public class CifraDeCesar {
 	      Scanner ler = new Scanner(System.in);
 
 	      System.out.printf("Informe um texto:\n");
-	      String str = ler.nextLine().toUpperCase();	      
-
+	      String str = ler.nextLine().toUpperCase();	  
+	      System.out.printf("Informe a chave:\n");
+	      int y = ler.nextInt();
+	      
 	      String cript = criptografa(str);
 	      System.out.printf("criptografado: %s \n",cript);
 	      
-	      System.out.printf("Informe a key para descriptografar ou 9999 para terminar o programa:\n");
+	      System.out.printf("\n Informe a key para descriptografar ou 9999 para terminar o programa:\n");
 	      int key = ler.nextInt();
 	      
-	      while(key != 9999) {
-		      System.out.printf("descriptografado: %s \n", descriptografa(cript,key));
+	      while(y != key) {
+		      
+		      System.out.printf("chave errada tente novamente:\n");
 		      System.out.printf("Informe a key para descriptografar ou 9999 para terminar o programa:\n");
 		      key = ler.nextInt();
+		      if(key == 9999){
+		          System.out.printf("Programa Finalizado \n");
+		          break;
+		      }
     	  }
-	      System.out.printf("Programa Finalizado\n");
+    	  if(y == key){
+    	        System.out.printf("descriptografado: %s \n", descriptografa(cript));
+	            System.out.printf("Programa Finalizado\n");
+    	  }
+    	  
 	      ler.close();
 	      
 
@@ -47,7 +57,7 @@ public class CifraDeCesar {
 	      
 	    }
 
-	    public static String descriptografa(String str, int x) {
+	    public static String descriptografa(String str) {
 	      int i;
 	      String aux = "";
 	    	  
@@ -63,7 +73,7 @@ public class CifraDeCesar {
 	    		  aux= aux + 'Z';
 	    		  
 	    	  }	    	  else {
-	    		  aux = aux + (char)(str.charAt(i) - x);
+	    		  aux = aux + (char)(str.charAt(i) - 3);
 	    	  }
 	      }
 	      return(aux);
